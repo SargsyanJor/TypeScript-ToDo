@@ -4,7 +4,6 @@ import type { ITodo } from "../types/index";
 import { ToDo } from "../components/ToDo/ToDo";
 import "../app/styles/App.css";
 
-
 function App() {
   const [text, setText] = useState<string>("");
   const [todo, setTodo] = useState<Array<ITodo>>([]);
@@ -18,9 +17,11 @@ function App() {
   };
 
   const addTodo = () => {
-    setTodo((prev) => {
-      return [...prev, { id: Date.now(), title: text, isDone: false }];
-    });
+    if (text.trim()) {
+      setTodo((prev) => {
+        return [...prev, { id: Date.now(), title: text, isDone: false }];
+      });
+    }
     setText("");
   };
 

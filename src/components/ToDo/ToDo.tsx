@@ -1,5 +1,5 @@
 import type { ITodo } from "../../types";
-import "./ToDo.css"
+import "./ToDo.css";
 
 type TodoProps = {
   todo: Array<ITodo>;
@@ -11,13 +11,20 @@ export const ToDo = ({ todo, handleRemove, handleChange }: TodoProps) => {
   return (
     <div>
       {todo.map((todo) => (
-        <div key={todo.id} className={todo.isDone ? "todo-item done" : "todo-item"}>
+        <div
+          key={todo.id}
+          className={todo.isDone ? "todo-item done" : "todo-item"}
+        >
           <input
             type="checkbox"
             checked={todo.isDone}
             onChange={() => handleChange(todo.id)}
           />
-          <span>{todo.title}</span>
+          <span>
+            {todo.title.length < 25
+              ? todo.title
+              : todo.title.slice(0, 25) + "..."}
+          </span>
           <button onClick={() => handleRemove(todo.id)}>X</button>
         </div>
       ))}
